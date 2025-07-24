@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='userhistory.css') }}">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        body {
+            background-image: url('/static/images/janko-ferlic-sfL_QOnmy00-unsplash.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        section {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        form {
+            display: inline;
+        }
+        .return-btn {
+            padding: 5px 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .return-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('admin_dashboard', user_id=user_id) }}" class="back-button">Back to Dashboard</a>
+
+    <h1 style="text-align: center; margin-top: 60px;">Borrowing History</h1>
+
+    <section>
+        {% if borrowing_history %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Book ID</th>
+                        <th>Book Name</th>
+                        <th>Date From</th>
+                        <th>Date To</th>
+                        <th>Status / Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in borrowing_history %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.book_id }}</td>
+                            <td>{{ record.book_name }}</td>
+                            <td>{{ record.date_from }}</td>
+                            <td>{{ record.date_to }}</td>
+                            <td>
+                                {% if record.status == 'Approved' %}
+                                    <form method="POST" action="{{ url_for('return_book') }}">
+                                        <input type="hidden" name="request_id" value="{{ record.id }}">
+                                        <button type="submit" class="return-btn">Return</button>
+                                    </form>
+                                {% else %}
+                                    {{ record.status }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="text-align: center;">No borrowing history found for this user.</p>
+        {% endif %}
+    </section>
+</body>
+</html>

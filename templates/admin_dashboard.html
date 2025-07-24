@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <style>
+        body {
+            background-image: url('/static/images/janko-ferlic-sfL_QOnmy00-unsplash.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #2196F3; /* blue header */
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+        h1 {
+    margin-top: 100px; /* Push heading down so buttons have space */
+    text-align: center;
+    color: #333;
+}
+
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Header menu (top right corner) */
+        .top-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .menu-button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #0b7dda;
+        }
+
+        .logout-button {
+            background-color: #f44336;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .dashboard-container {
+            width: 90%;
+            margin: 0 auto;
+            background-color: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        form, table {
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid #999;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top right menu: Manage Books + Logout -->
+    <div class="top-menu">
+        <a href="{{ url_for('book_management') }}" class="menu-button">Manage Books</a>
+        <a href="{{ url_for('logout') }}" class="menu-button logout-button">Logout</a>
+    </div>
+
+    <h1>Welcome to the Admin Dashboard</h1>
+
+    <div class="dashboard-container">
+
+        <!-- Create User -->
+        <div class="create-user-section">
+            <h2>Create a New Library User</h2>
+            <form method="POST">
+                <label for="user_email">Email</label>
+                <input type="email" id="user_email" name="user_email" required>
+
+                <label for="user_password">Password</label>
+                <input type="password" id="user_password" name="user_password" required>
+
+                <button type="submit" name="create_user">Create User</button>
+            </form>
+        </div>
+
+        <!-- Borrow Requests -->
+        <h2>Book Borrow Requests</h2>
+        <table>
+            <tr>
+                <th>Request ID</th>
+                <th>User Email</th>
+                <th>Book Title</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for request in borrow_requests %}
+            <tr>
+                <td>{{ request[0] }}</td>
+                <td>{{ request[1] }}</td>
+                <td>{{ request[2] }}</td>
+                <td>{{ request[3] }}</td>
+                <td>
+                    {% if request[3] == 'Pending' %}
+                        <form method="POST" style="display:inline;">
+                            <button type="submit" name="approve" value="Approve">Approve</button>
+                            <input type="hidden" name="request_id" value="{{ request[0] }}">
+                        </form>
+                        <form method="POST" style="display:inline;">
+                            <button type="submit" name="deny" value="Deny">Deny</button>
+                            <input type="hidden" name="request_id" value="{{ request[0] }}">
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- User Borrow History -->
+        <h2>User Borrow History</h2>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>User Email</th>
+                <th>Action</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td><a href="{{ url_for('user_history', user_id=user[0]) }}">View History</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    margin-top: 50px; /* Space from the top */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px 20px;
+    border-radius: 8px; /* Optional: gives rounded corners */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto; /* Horizontally center the h1 */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center the content */
+    justify-content: center; /* Vertically center the content */
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+}
+
+
+p {
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dashboard-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Create User Section */
+.create-user-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.create-user-section h2 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+form label {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling for borrow requests */
+table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+tr {
+    background-color: white; /* Ensure all rows have a white background */
+}
+
+tr:nth-child(even) {
+    background-color: white; /* Ensure alternating rows are also white */
+}
+
+
+/* Buttons for approving and denying borrow requests */
+button.approve, button.deny {
+    padding: 8px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+button.approve {
+    background-color: #28a745;
+    color: white;
+}
+
+button.approve:hover {
+    background-color: #218838;
+}
+
+button.deny {
+    background-color: #dc3545;
+    color: white;
+}
+
+button.deny:hover {
+    background-color: #c82333;
+}
+
+/* User borrow history section */
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 40px;
+}
+
+a.view-history {
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a.view-history:hover {
+    text-decoration: underline;
+}
+
+/* Logout link */
+.logout-link {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.2rem;
+}
+
+.logout-link a {
+    text-decoration: none;
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.logout-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design: Ensure the layout looks good on smaller screens */
+@media (max-width: 768px) {
+    .dashboard-container {
+        width: 90%;
+        padding: 30px 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p, .admin-functions a, form label, form input, form button {
+        font-size: 1rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    button.approve, button.deny {
+        font-size: 0.9rem;
+    }
+}

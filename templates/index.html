@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            
+            background-image: url("{{ url_for('static', filename='bg.jpeg') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .container h1 {
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #222; /* darker */
+    font-weight: 600; /* make it slightly bolder */
+}
+
+
+        /* .container h1 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #333;
+        } */
+
+        .login-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-buttons button {
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007B5E;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-buttons button:hover {
+            background-color: #005f45;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Library Management System</h1>
+        <div class="login-buttons">
+            <button onclick="location.href='/user-login'">User Login</button>
+            <button onclick="location.href='/admin-login'">Admin Login</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/bg.jpg'); /* Use your own image path */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.92);
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 8px;
+            margin: 5px;
+            width: 25%;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            margin: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .bottom-links {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .bottom-links a {
+            text-decoration: none;
+            color: #0066cc;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add New Book</h2>
+        <form method="POST" action="{{ url_for('add_book') }}">
+            <input type="text" name="title" placeholder="Title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="number" name="quantity" placeholder="Quantity" required>
+            <button type="submit">Add Book</button>
+        </form>
+
+        <h2>Book List</h2>
+        <table>
+            <tr><th>S.No</th><th>Title</th><th>Author</th><th>Available</th><th>Action</th></tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ book[1] }}</td>
+                <td>{{ book[2] }}</td>
+                <td>{{ book[3] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_book') }}">
+                        <input type="hidden" name="book_id" value="{{ book[0] }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="bottom-links">
+            <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

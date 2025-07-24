@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_dashboard.css') }}">
+    <style>
+        /* Body and Background */
+        body {
+            background-image: url('/static/images/janko-ferlic-sfL_QOnmy00-unsplash.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Logout Button */
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Center the Download History button */
+        .center-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px; /* Add some margin to separate from other content */
+        }
+
+        .download-button {
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        
+
+        
+
+        
+
+    </style>
+</head>
+<body>
+    <!-- Logout Button -->
+    <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+
+    <h1>Welcome to User Dashboard</h1>
+
+ 
+    <form action="{{ url_for('borrow_book') }}" method="POST">
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+
+        <label for="book_id">Select a Book:</label>
+        <select name="book_id" id="book_id" required>
+            <option value="" disabled selected>Select a book</option>
+            {% for book in books %}
+            <option value="{{ book[0] }}">{{ book[1] }} - {{ book[2] }} (Available: {{ book[3] }})</option>
+
+
+            {% endfor %}
+        </select>
+
+        <label for="date_from">From:</label>
+        <input type="date" name="date_from" id="date_from" required>
+
+        <label for="date_to">To:</label>
+        <input type="date" name="date_to" id="date_to" required>
+
+        <button type="submit">Borrow</button>
+    </form>
+
+    <h2>Your Borrow History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in borrow_history %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Download History Button -->
+    <div class="center-button">
+        <a href="{{ url_for('download_history', user_id=user_id) }}" class="download-button">Download History</a>
+    </div>
+
+</body>
+<script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+        const fromDate = document.getElementById("date_from").value;
+        const toDate = document.getElementById("date_to").value;
+
+        if (fromDate >= toDate) {
+            e.preventDefault();  // Stop form from submitting
+            alert("‘To’ date must be after ‘From’ date.");
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,125 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+h1 {
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    margin-top: 80px; /* Space from the top */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px; /* Adjusted padding */
+    border-radius: 8px; /* Optional: gives rounded corners */
+    margin-left: auto;
+    margin-right: auto; /* Horizontally center the h1 */
+    width: 90%;
+    margin-bottom: 20px; /* Reduced bottom margin */
+}
+ h2 {
+    text-align: center;
+    color: white;
+}
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Form styles */
+form {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form select, form button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px; /* Smaller padding */
+    width: auto;
+}
+
+form button:hover {
+    background-color: #007bff;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    form, table {
+        width: 95%;
+    }
+
+    form input, form select, form button {
+        font-size: 14px;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Add spacing between the table and the button */
+}
+#downloadHistory {
+    background-color: white;
+    color: black; /* Set the text color to black for better visibility */
+    border: 1px solid #ccc; /* Optional: Add a light border to differentiate the button */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Added transition for text color */
+}
+
+#downloadHistory:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+    color: black; /* Keep text color black on hover for better visibility */
+}
